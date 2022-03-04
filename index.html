@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MVVM</title>
+  </head>
+  <body>
+    <div id="app">
+      <div v-html="topic"></div>
+      <input type="text" v-model="introduce" />
+      <p>我的姓{{familyName}}，名{{realName}}</p>
+      <p>我的全名是{{fullName}}</p>
+      <p>我的年龄是{{age}}</p>
+      <p>
+        我的祖国是
+        <span v-text="country"></span>
+      </p>
+      <p>自我介绍内容：{{introduce}}</p>
+      <button v-on:click="onAddAge">加年龄</button>
+    </div>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.5.0/vue.min.js"></script> -->
+    <script src="./index.js"></script>
+    <script>
+      let vm = new MVVM({
+        el: document.getElementById("app"),
+        data: {
+          topic:"<h1>介绍会</h1>",
+          familyName: "廖",
+          realName: "秀力",
+          age: 18,
+          country: "中国",
+          introduce: "自我介绍",
+        },
+        computed: {
+          fullName() {
+            return this.familyName + this.realName;
+          },
+        },
+        methods:{
+          onAddAge(){
+            this.age++;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

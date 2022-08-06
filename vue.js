@@ -1037,12 +1037,8 @@
         configurable: true,
         get: function reactiveGetter () {
           var value = getter ? getter.call(obj) : val;
-          console.log("-----------------");
-          console.log(Dep.target);
           if (Dep.target) {
-            console.log(value);
             dep.depend();
-            console.log("-----------------");
             if (childOb) {
               childOb.dep.depend();
               if (Array.isArray(value)) {

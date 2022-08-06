@@ -19,13 +19,14 @@
       <p>自我介绍内容：{{introduce}}</p>
       <button v-on:click="onAddAge">加年龄</button>
     </div>
+    <!-- <script src="./index.js"></script> -->
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.5.0/vue.min.js"></script> -->
-    <script src="./index.js"></script>
+    <script src="./vue.js"></script>
     <script>
-      let vm = new MVVM({
+      let vm = new Vue({
         el: document.getElementById("app"),
         data: {
-          topic:"<h1>介绍会</h1>",
+          topic: "<h1>介绍会</h1>",
           familyName: "廖",
           realName: "秀力",
           age: 18,
@@ -37,11 +38,26 @@
             return this.familyName + this.realName;
           },
         },
-        methods:{
-          onAddAge(){
+        methods: {
+          onAddAge() {
             this.age++;
-          }
-        }
+          },
+        },
+        mounted() {
+          this.$once("once_event11", (value) => {
+            console.log(value);
+          });
+          this.$watch(
+            () => {
+              return this.age + this.realName;
+            },
+            (newVal, oldVal) => {
+              console.log(newVal, oldVal);
+            }
+          );
+          this.age++;
+          this.realName = "nini";
+        },
       });
     </script>
   </body>
